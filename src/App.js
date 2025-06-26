@@ -37,6 +37,7 @@ function Tasks({ user, onLogout }) {
       <p>Welcome, {user.name}</p>
       <button onClick={handleLogout}>Sign Out</button>
       <TaskList userEmail={user.email} />
+
     </div>
   );
 }
