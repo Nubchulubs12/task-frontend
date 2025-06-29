@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route, useNavigate } from 'react-route
 import { GoogleOAuthProvider, GoogleLogin } from '@react-oauth/google';
 import { jwtDecode } from 'jwt-decode';
 import TaskList from './components/TaskList';
+import './index.css';
 
 function Home({ onLogin }) {
   const navigate = useNavigate();
@@ -14,12 +15,24 @@ function Home({ onLogin }) {
   };
 
   return (
-    <div>
-      <h1>My Task App</h1>
+  <div className="layout">
+    <div className="sidebar"></div>
+
+   <div className="content">
+        <h1 style={{
+          textAlign: 'center',
+          fontWeight: 'bold',
+          fontSize: '1.2rem',
+          marginBottom: '1rem'
+        }}>
+      My Task App</h1>
       <GoogleLogin
         onSuccess={handleLoginSuccess}
         onError={() => console.log('Login Failed')}
       />
+    </div>
+      <div className="sidebar"></div>
+
     </div>
   );
 }
@@ -33,12 +46,34 @@ function Tasks({ user, onLogout }) {
   };
 
   return (
-    <div>
-      <p>Welcome, {user.name}</p>
-      <button onClick={handleLogout}>Sign Out</button>
-      <TaskList userEmail={user.email} />
+   <div>
+     <p style={{
+       textAlign: 'center',
+       fontWeight: 'bold',
+       fontSize: '1.2rem',
+       marginBottom: '1rem'
+     }}>
+       Welcome, {user.name}
+     </p>
 
-    </div>
+     <div style={{ textAlign: 'center', marginBottom: '1rem' }}>
+       <button
+         onClick={handleLogout}
+         style={{
+           backgroundColor: '#ff4d4d',
+           color: '#fff',
+           border: 'none',
+           padding: '0.5rem 1rem',
+           borderRadius: '5px',
+           cursor: 'pointer'
+         }}
+       >
+         Sign Out
+       </button>
+     </div>
+
+     <TaskList userEmail={user.email} />
+   </div>
   );
 }
 
